@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
 import GameCardComponent from './GameCardComponent';
 
 function getRandomInt(max) {
@@ -77,7 +77,7 @@ export default class GameComponent extends Component {
             this.currentAttemptToMatch = [];
           }
         );
-      }, 1500);
+      }, 1000);
     }
   };
 
@@ -102,6 +102,7 @@ export default class GameComponent extends Component {
 
       this.matchingCards[nextSpot1] = nextSpot2;
       this.matchingCards[nextSpot2] = nextSpot1;
+      Image.prefetch(cards[nextSpot1].url);
     }
 
     this.setState({ cards, matchingDictionary });
@@ -110,6 +111,9 @@ export default class GameComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={{ color: '#757575', fontWeight: 'bold', fontSize: 18 }}>
+          Meow Match
+        </Text>
         <View style={styles.cards}>
           {this.state.cards.map((item, index) => (
             <GameCardComponent
@@ -131,7 +135,7 @@ export default class GameComponent extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#DB784A',
+    backgroundColor: '#757575',
     width: 150,
     height: 40,
     justifyContent: 'center',

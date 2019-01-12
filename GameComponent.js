@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import GameCardComponent from './GameCardComponent';
 
 function getRandomInt(max) {
@@ -22,7 +22,6 @@ function getNextAvailableRandom(cards) {
 export default class GameComponent extends Component {
   isProcessing = false;
   currentAttemptToMatch = [];
-  alreadyMatched = [];
   matchingCards = {};
 
   constructor(props) {
@@ -33,26 +32,7 @@ export default class GameComponent extends Component {
   }
 
   componentWillMount = async () => {
-    const response = await fetch(
-      'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6'
-    );
-    const cats = await response.json();
-    catsUrl = cats.map(c => c.url);
-
-    cards = new Array(12);
-    matchingDictionary = {};
-    for (let i = 0; i < 6; i++) {
-      let nextSpot1 = getNextAvailableRandom(cards);
-      cards[nextSpot1] = { id: nextSpot1, url: catsUrl[i], isOpen: false };
-
-      let nextSpot2 = getNextAvailableRandom(cards);
-      cards[nextSpot2] = { id: nextSpot2, url: catsUrl[i], isOpen: false };
-
-      this.matchingCards[nextSpot1] = nextSpot2;
-      this.matchingCards[nextSpot2] = nextSpot1;
-    }
-
-    this.setState({ cards, matchingDictionary });
+    this.onReset();
   };
 
   /*
@@ -101,6 +81,32 @@ export default class GameComponent extends Component {
     }
   };
 
+  onReset = async () => {
+    this.matchingCards = {};
+    this.currentAttemptToMatch = [];
+
+    const response = await fetch(
+      'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6'
+    );
+    const cats = await response.json();
+    catsUrl = cats.map(c => c.url);
+
+    cards = new Array(12);
+    matchingDictionary = {};
+    for (let i = 0; i < 6; i++) {
+      let nextSpot1 = getNextAvailableRandom(cards);
+      cards[nextSpot1] = { id: nextSpot1, url: catsUrl[i], isOpen: false };
+
+      let nextSpot2 = getNextAvailableRandom(cards);
+      cards[nextSpot2] = { id: nextSpot2, url: catsUrl[i], isOpen: false };
+
+      this.matchingCards[nextSpot1] = nextSpot2;
+      this.matchingCards[nextSpot2] = nextSpot1;
+    }
+
+    this.setState({ cards, matchingDictionary });
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -113,12 +119,34 @@ export default class GameComponent extends Component {
             />
           ))}
         </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={this.onReset}>
+            <Text style={styles.buttonText}>Reset!</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: '#DB784A',
+    width: 150,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 15
+  },
+  buttonContainer: {
+    flex: 0.1,
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold'
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',

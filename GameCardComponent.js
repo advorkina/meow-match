@@ -2,20 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
 export default class GameCardComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOpen: false };
-  }
-  onPress = () => {
-    this.setState(prev => ({
-      isOpen: !prev.isOpen
-    }));
-  };
-
   render() {
     return (
-      <TouchableOpacity style={styles.container} onPress={this.onPress}>
-        {!this.state.isOpen ? (
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => this.props.onCardTap(this.props.card.id)}>
+        {!this.props.card.isOpen ? (
           <View style={[styles.card, { backgroundColor: '#E552EA' }]}>
             <Text style={{ color: 'white', fontWeight: 'bold' }}>
               Tap On Me!
@@ -24,7 +16,7 @@ export default class GameCardComponent extends Component {
         ) : (
           <View style={[styles.card, { backgroundColor: '#FFCCED' }]}>
             <Image
-              source={{ uri: this.props.imageUrl }}
+              source={{ uri: this.props.card.url }}
               style={{ width: '100%', height: '100%', borderRadius: 15 }}
             />
           </View>

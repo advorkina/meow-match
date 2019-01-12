@@ -20,9 +20,16 @@ function getNextAvailableRandom(cards) {
 }
 
 export default class GameComponent extends Component {
+  isProcessing = false;
+  currentAttemptToMatch = [];
+  alreadyMatched = [];
+  matchingCards = {};
+
   constructor(props) {
     super(props);
-    this.state = { cards: [] };
+    this.state = {
+      cards: []
+    };
   }
 
   componentWillMount = async () => {
@@ -33,15 +40,65 @@ export default class GameComponent extends Component {
     catsUrl = cats.map(c => c.url);
 
     cards = new Array(12);
+    matchingDictionary = {};
     for (let i = 0; i < 6; i++) {
-      let nextSpot = getNextAvailableRandom(cards);
-      cards[nextSpot] = catsUrl[i];
+      let nextSpot1 = getNextAvailableRandom(cards);
+      cards[nextSpot1] = { id: nextSpot1, url: catsUrl[i], isOpen: false };
 
-      nextSpot = getNextAvailableRandom(cards);
-      cards[nextSpot] = catsUrl[i];
+      let nextSpot2 = getNextAvailableRandom(cards);
+      cards[nextSpot2] = { id: nextSpot2, url: catsUrl[i], isOpen: false };
+
+      this.matchingCards[nextSpot1] = nextSpot2;
+      this.matchingCards[nextSpot2] = nextSpot1;
     }
 
-    this.setState({ cards: cards });
+    this.setState({ cards, matchingDictionary });
+  };
+
+  /*
+    1. always first open the card
+    2. check if there is already one card opened
+    3. if not -> add card to the current matched array and continue
+    4. if yes -> check if they match
+    5. if they match -> leave open
+    6. if dont match -> close both
+  */
+  onCardTap = id => {
+    if (this.isProcessing) {
+      return;
+    }
+
+    isProcessing = true;
+    const cardsCopy = [...this.state.cards];
+    cardsCopy[id].isOpen = true;
+    this.setState(prev => ({ ...prev, cards: cardsCopy }));
+
+    if (this.currentAttemptToMatch.length < 1) {
+      this.currentAttemptToMatch = [id];
+      this.isProcessing = false;
+      return;
+    }
+
+    if (this.matchingCards[this.currentAttemptToMatch[0]] === id) {
+      this.isProcessing = false;
+      this.currentAttemptToMatch = [];
+    } else {
+      setTimeout(() => {
+        const cardsCopy = [...this.state.cards];
+        cardsCopy[id].isOpen = false;
+        cardsCopy[this.currentAttemptToMatch[0]].isOpen = false;
+        this.setState(
+          prev => ({
+            ...prev,
+            cards: cardsCopy
+          }),
+          () => {
+            this.isProcessing = false;
+            this.currentAttemptToMatch = [];
+          }
+        );
+      }, 1500);
+    }
   };
 
   render() {
@@ -49,7 +106,11 @@ export default class GameComponent extends Component {
       <View style={styles.container}>
         <View style={styles.cards}>
           {this.state.cards.map((item, index) => (
-            <GameCardComponent key={index} imageUrl={item} />
+            <GameCardComponent
+              key={index}
+              card={item}
+              onCardTap={this.onCardTap}
+            />
           ))}
         </View>
       </View>

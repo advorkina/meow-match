@@ -1,12 +1,31 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class GameCardComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isOpen: false };
+  }
+  onPress = () => {
+    this.setState(prev => ({
+      isOpen: !prev.isOpen
+    }));
+  };
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Tap on me!</Text>
-      </View>
+      <TouchableOpacity style={styles.container} onPress={this.onPress}>
+        {!this.state.isOpen ? (
+          <View style={[styles.card, { backgroundColor: '#E552EA' }]}>
+            <Text>Tap On Me!</Text>
+          </View>
+        ) : null}
+        {this.state.isOpen ? (
+          <View style={[styles.card, { backgroundColor: '#FFCCED', flex: 1 }]}>
+            <Text>I'm opened!</Text>
+          </View>
+        ) : null}
+      </TouchableOpacity>
     );
   }
 }
@@ -14,10 +33,13 @@ export default class GameCardComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     width: '30%',
-    aspectRatio: 1,
-    backgroundColor: 'tomato',
+    aspectRatio: 1
+  },
+  card: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15
+    borderRadius: 15,
+    flex: 1,
+    width: '100%'
   }
 });

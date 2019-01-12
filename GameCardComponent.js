@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
 export default class GameCardComponent extends Component {
   constructor(props) {
@@ -17,14 +17,18 @@ export default class GameCardComponent extends Component {
       <TouchableOpacity style={styles.container} onPress={this.onPress}>
         {!this.state.isOpen ? (
           <View style={[styles.card, { backgroundColor: '#E552EA' }]}>
-            <Text>Tap On Me!</Text>
+            <Text style={{ color: 'white', fontWeight: 'bold' }}>
+              Tap On Me!
+            </Text>
           </View>
-        ) : null}
-        {this.state.isOpen ? (
-          <View style={[styles.card, { backgroundColor: '#FFCCED', flex: 1 }]}>
-            <Text>I'm opened!</Text>
+        ) : (
+          <View style={[styles.card, { backgroundColor: '#FFCCED' }]}>
+            <Image
+              source={{ uri: this.props.imageUrl }}
+              style={{ width: '100%', height: '100%', borderRadius: 15 }}
+            />
           </View>
-        ) : null}
+        )}
       </TouchableOpacity>
     );
   }

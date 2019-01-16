@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 44208,
-  "expoServerNgrokUrl": "https://f5-44g.advorkina.react-native-memory-game.exp.direct",
-  "packagerNgrokUrl": "https://packager.f5-44g.advorkina.react-native-memory-game.exp.direct",
-  "ngrokPid": 44222
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

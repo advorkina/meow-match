@@ -7,7 +7,7 @@ function getRandomInt(max) {
 }
 
 function getNextAvailableRandom(cards) {
-  let nextSpot = getRandomInt(6);
+  let nextSpot = getRandomInt(12);
   while (cards[nextSpot]) {
     if (nextSpot == cards.length - 1) {
       nextSpot = 0;

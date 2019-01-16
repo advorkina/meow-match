@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'tomato',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15
+    borderRadius: 15,
+    marginTop: 15
   }
 });

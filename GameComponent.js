@@ -16,17 +16,15 @@ export default class GameComponent extends Component {
     );
     const cat = await response.json();
     catUrl = cat[0].url;
-    this.setState({ catUrl: catUrl });
+    this.setState({ catUrl });
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.cards}>
-          {this.cards.map((item, index) => (
-            <GameCardComponent key={index} imageUrl={this.state.catUrl} />
-          ))}
-        </View>
+        {this.cards.map((item, index) => (
+          <GameCardComponent key={index} imageUrl={this.state.catUrl} />
+        ))}
       </View>
     );
   }
@@ -35,16 +33,11 @@ export default class GameComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-  cards: {
-    flex: 0.5,
+    alignContent: 'center',
     flexWrap: 'wrap',
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'space-around',
     justifyContent: 'space-around'
   }
 });

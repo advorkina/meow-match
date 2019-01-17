@@ -7,7 +7,7 @@ function getRandomInt(max) {
 }
 
 function getNextAvailableRandom(cards) {
-  let nextSpot = getRandomInt(6);
+  let nextSpot = getRandomInt(12);
   while (cards[nextSpot]) {
     if (nextSpot == cards.length - 1) {
       nextSpot = 0;
@@ -47,11 +47,9 @@ export default class GameComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.cards}>
-          {this.state.cards.map((item, index) => (
-            <GameCardComponent key={index} imageUrl={item} />
-          ))}
-        </View>
+        {this.state.cards.map((item, index) => (
+          <GameCardComponent key={index} imageUrl={item} />
+        ))}
       </View>
     );
   }
@@ -60,16 +58,11 @@ export default class GameComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
-  },
-  cards: {
-    flex: 0.7,
+    alignContent: 'center',
     flexWrap: 'wrap',
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignContent: 'space-around',
     justifyContent: 'space-around'
   }
 });

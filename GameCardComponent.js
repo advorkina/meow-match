@@ -17,11 +17,11 @@ export default class GameCardComponent extends Component {
       <TouchableOpacity style={styles.container} onPress={this.onPress}>
         {!this.state.isOpen ? (
           <View style={[styles.card, { backgroundColor: '#E552EA' }]}>
-            <Text style={styles.text}>Tap On Me!</Text>
+            <Text style={styles.text}>Tap!</Text>
           </View>
         ) : null}
         {this.state.isOpen ? (
-          <View style={[styles.card, { backgroundColor: '#FFCCED', flex: 1 }]}>
+          <View style={[styles.card, { backgroundColor: '#FFCCED' }]}>
             <Text style={styles.text}>I'm opened!</Text>
           </View>
         ) : null}
@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
     flex: 1,
-    width: '100%',
     marginTop: 15
   },
   text: {

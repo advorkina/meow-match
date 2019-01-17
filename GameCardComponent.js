@@ -9,9 +9,7 @@ export default class GameCardComponent extends Component {
         onPress={() => this.props.onCardTap(this.props.card.id)}>
         {!this.props.card.isOpen ? (
           <View style={[styles.card, { backgroundColor: '#E552EA' }]}>
-            <Text style={{ color: 'white', fontWeight: 'bold' }}>
-              Tap On Me!
-            </Text>
+            <Text style={styles.text}>Tap!</Text>
           </View>
         ) : (
           <View style={[styles.card, { backgroundColor: '#FFCCED' }]}>
@@ -36,6 +34,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
     flex: 1,
-    width: '100%'
+    marginTop: 15
+  },
+  text: {
+    color: 'white',
+    fontWeight: 'bold'
   }
 });

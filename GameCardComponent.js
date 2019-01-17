@@ -5,7 +5,7 @@ export default class GameCardComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Tap on me!</Text>
+        <Text style={styles.text}>Tap!</Text>
       </View>
     );
   }
@@ -20,5 +20,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 15,
     marginTop: 15
+  },
+  text: {
+    color: 'white',
+    fontWeight: 'bold'
   }
 });

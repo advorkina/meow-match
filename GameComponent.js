@@ -86,20 +86,7 @@ export default class GameComponent extends Component {
       return;
     }
 
-    setTimeout(() => {
-      const cardsCopy = [...this.state.cards];
-      cardsCopy[id].isOpen = false;
-      cardsCopy[this.currentAttemptToMatch[0]].isOpen = false;
-      this.setState(
-        prev => ({
-          ...prev,
-          cards: cardsCopy
-        }),
-        () => {
-          this.currentAttemptToMatch = [];
-        }
-      );
-    }, 1500);
+    // TODO: your code here
   };
 
   render() {

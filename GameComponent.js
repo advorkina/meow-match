@@ -20,7 +20,6 @@ function getNextAvailableRandom(cards) {
 }
 
 export default class GameComponent extends Component {
-  isProcessing = false;
   currentAttemptToMatch = [];
   alreadyMatched = [];
   matchingCards = {};
@@ -34,7 +33,7 @@ export default class GameComponent extends Component {
 
   componentWillMount = async () => {
     const response = await fetch(
-      'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6'
+      'https://api.thecatapi.com/v1/images/search?mime_types=gif&limit=6'
     );
     const cats = await response.json();
     catsUrl = cats.map(c => c.url);
@@ -56,31 +55,25 @@ export default class GameComponent extends Component {
   };
 
   /*
-    1. always first open the card
-    2. check if there is already one card opened
-    3. if not -> add card to the current matched array and continue
-    4. if yes -> check if they match
-    5. if they match -> leave open
-    6. if dont match -> close both
-  */
+   1. first open the card
+   2. check if there is already one card opened
+   3. if not -> add the card to the current matches array and wait for the next card
+   5. if there 2 cards open -> check if they match
+   5. if they match -> leave them open
+   6. if don’t match -> close both
+   7. clean up current matches
+ */
   onCardTap = id => {
-    if (this.isProcessing) {
-      return;
-    }
-
-    isProcessing = true;
     const cardsCopy = [...this.state.cards];
     cardsCopy[id].isOpen = true;
     this.setState(prev => ({ ...prev, cards: cardsCopy }));
 
     if (this.currentAttemptToMatch.length < 1) {
       this.currentAttemptToMatch = [id];
-      this.isProcessing = false;
       return;
     }
 
     if (this.matchingCards[this.currentAttemptToMatch[0]] === id) {
-      this.isProcessing = false;
       this.currentAttemptToMatch = [];
     } else {
       setTimeout(() => {
@@ -93,7 +86,6 @@ export default class GameComponent extends Component {
             cards: cardsCopy
           }),
           () => {
-            this.isProcessing = false;
             this.currentAttemptToMatch = [];
           }
         );

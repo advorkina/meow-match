@@ -106,7 +106,12 @@ export default class GameComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ color: '#757575', fontWeight: 'bold', fontSize: 18 }}>
+        <Text
+          style={{
+            color: '#757575',
+            fontWeight: 'bold',
+            fontSize: 18
+          }}>
           Meow Match
         </Text>
         <View style={styles.cards}>
@@ -153,7 +158,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   cards: {
-    flex: 0.7,
+    flex: 0.8,
     flexWrap: 'wrap',
     flexDirection: 'row',
     alignItems: 'center',

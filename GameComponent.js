@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#fff',
-    alignItems: 'center',
     alignContent: 'center',
     flexWrap: 'wrap',
     justifyContent: 'space-around'

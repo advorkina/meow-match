@@ -108,7 +108,7 @@ export default class GameComponent extends Component {
       <View style={styles.container}>
         <Text
           style={{
-            color: '#757575',
+            color: 'lightslategrey',
             fontWeight: 'bold',
             fontSize: 18
           }}>
@@ -135,7 +135,7 @@ export default class GameComponent extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#757575',
+    backgroundColor: 'lightslategrey',
     width: 150,
     height: 40,
     justifyContent: 'center',

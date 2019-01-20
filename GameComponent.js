@@ -3,12 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import GameCardComponent from './GameCardComponent';
 
 export default class GameComponent extends Component {
-  cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = { cards: [] };
 
   componentWillMount = async () => {
     const response = await fetch(
@@ -16,14 +11,18 @@ export default class GameComponent extends Component {
     );
     const cat = await response.json();
     catUrl = cat[0].url;
-    this.setState({ catUrl });
+    cards = [];
+    for (let i = 0; i < 9; i++) {
+      cards.push({ id: i, url: catUrl });
+    }
+    this.setState({ cards });
   };
 
   render() {
     return (
       <View style={styles.container}>
-        {this.cards.map((item, index) => (
-          <GameCardComponent key={index} imageUrl={this.state.catUrl} />
+        {this.state.cards.map(item => (
+          <GameCardComponent key={item.id} imageUrl={item.url} />
         ))}
       </View>
     );
@@ -35,7 +34,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#fff',
-    alignItems: 'center',
     alignContent: 'center',
     flexWrap: 'wrap',
     justifyContent: 'space-around'

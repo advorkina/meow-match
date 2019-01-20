@@ -57,7 +57,7 @@ export default class GameCardComponent extends Component {
         onPress={this.onPress}
         activeOpacity={0.9}>
         <Animated.View
-          style={[styles.card, { backgroundColor: '#FFB407' }, frontAnimation]}>
+          style={[styles.card, { backgroundColor: 'tomato' }, frontAnimation]}>
           <Text style={{ color: 'white', fontWeight: 'bold' }}>Tap!</Text>
         </Animated.View>
         <Animated.View style={[styles.card, styles.backCard, backAnimation]}>

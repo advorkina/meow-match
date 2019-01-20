@@ -18,10 +18,10 @@ export default class GameComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
     backgroundColor: '#fff',
-    alignContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    alignContent: 'center'
   }
 });

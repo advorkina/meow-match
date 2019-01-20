@@ -63,7 +63,12 @@ export default class GameCardComponent extends Component {
         <Animated.View style={[styles.card, styles.backCard, backAnimation]}>
           <Image
             source={{ uri: this.props.card.url }}
-            style={{ width: '100%', height: '100%', borderRadius: 15 }}
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: 15,
+              overlayColor: 'white'
+            }}
           />
         </Animated.View>
       </TouchableOpacity>

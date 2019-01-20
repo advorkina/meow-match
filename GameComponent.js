@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import GameCardComponent from './GameCardComponent';
 
 export default class GameComponent extends Component {
@@ -12,7 +12,7 @@ export default class GameComponent extends Component {
 
   componentWillMount = async () => {
     const response = await fetch(
-      'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png'
+      'https://api.thecatapi.com/v1/images/search?mime_types=gif'
     );
     const cat = await response.json();
     catUrl = cat[0].url;

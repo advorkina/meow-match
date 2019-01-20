@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
   container: {
     aspectRatio: 1,
-    width: '23%'
+    width: '30%'
   },
   card: {
     backfaceVisibility: 'hidden',

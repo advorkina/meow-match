@@ -63,33 +63,43 @@ export default class GameComponent extends Component {
    7. clean up current matches
  */
   onCardTap = id => {
-    const cardsCopy = [...this.state.cards];
-    cardsCopy[id].isOpen = true;
-    this.setState(prev => ({ ...prev, cards: cardsCopy }));
-
-    if (this.currentAttemptToMatch.length < 1) {
-      this.currentAttemptToMatch = [id];
+    // if we are now processing card check - ignore click
+    if (this.currentAttemptToMatch.length == 2) {
       return;
     }
 
+    // make a copy
+    const cardsCopy = [...this.state.cards];
+    cardsCopy[id].isOpen = true;
+    this.currentAttemptToMatch.push(id);
+
+    // update state to get card opened
+    this.setState(prev => ({ ...prev, cards: cardsCopy }));
+
+    if (this.currentAttemptToMatch.length < 2) {
+      return;
+    }
+
+    // if they match leave them open and continue
     if (this.matchingCards[this.currentAttemptToMatch[0]] === id) {
       this.currentAttemptToMatch = [];
-    } else {
-      setTimeout(() => {
-        const cardsCopy = [...this.state.cards];
-        cardsCopy[id].isOpen = false;
-        cardsCopy[this.currentAttemptToMatch[0]].isOpen = false;
-        this.setState(
-          prev => ({
-            ...prev,
-            cards: cardsCopy
-          }),
-          () => {
-            this.currentAttemptToMatch = [];
-          }
-        );
-      }, 1500);
+      return;
     }
+
+    setTimeout(() => {
+      const cardsCopy = [...this.state.cards];
+      cardsCopy[id].isOpen = false;
+      cardsCopy[this.currentAttemptToMatch[0]].isOpen = false;
+      this.setState(
+        prev => ({
+          ...prev,
+          cards: cardsCopy
+        }),
+        () => {
+          this.currentAttemptToMatch = [];
+        }
+      );
+    }, 1500);
   };
 
   render() {

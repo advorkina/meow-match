@@ -7,10 +7,10 @@ export default class GameComponent extends Component {
 
   componentWillMount = async () => {
     const response = await fetch(
-      'https://api.thecatapi.com/v1/images/search?mime_types=gif'
+      'https://api.thecatapi.com/v1/images/search?mime_types=gif&limit=1'
     );
     const cat = await response.json();
-    catUrl = cat[0].url;
+    const catUrl = cat[0].url;
     cards = [];
     for (let i = 0; i < 9; i++) {
       cards.push({ id: i, url: catUrl });

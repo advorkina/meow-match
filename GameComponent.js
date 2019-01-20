@@ -39,7 +39,6 @@ export default class GameComponent extends Component {
     catsUrl = cats.map(c => c.url);
 
     cards = new Array(12);
-    matchingDictionary = {};
     for (let i = 0; i < 6; i++) {
       let nextSpot1 = getNextAvailableRandom(cards);
       cards[nextSpot1] = { id: nextSpot1, url: catsUrl[i], isOpen: false };
@@ -51,7 +50,7 @@ export default class GameComponent extends Component {
       this.matchingCards[nextSpot2] = nextSpot1;
     }
 
-    this.setState({ cards, matchingDictionary });
+    this.setState({ cards });
   };
 
   /*

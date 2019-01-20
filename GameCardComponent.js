@@ -19,12 +19,11 @@ export default class GameCardComponent extends Component {
           <View style={[styles.card, { backgroundColor: 'tomato' }]}>
             <Text style={styles.text}>Tap!</Text>
           </View>
-        ) : null}
-        {this.state.isOpen ? (
+        ) : (
           <View style={[styles.card, { backgroundColor: 'seagreen' }]}>
             <Text style={styles.text}>I'm opened!</Text>
           </View>
-        ) : null}
+        )}
       </TouchableOpacity>
     );
   }

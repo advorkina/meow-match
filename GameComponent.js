@@ -110,7 +110,7 @@ export default class GameComponent extends Component {
           style={{
             color: 'lightslategrey',
             fontWeight: 'bold',
-            fontSize: 18
+            fontSize: 22
           }}>
           Meow Match
         </Text>

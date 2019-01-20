@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 export default class GameCardComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false };
+    this.state = { isOpen: false, tapText: 'Tap!' };
   }
   onPress = () => {
     this.setState(prev => ({
@@ -17,7 +17,7 @@ export default class GameCardComponent extends Component {
       <TouchableOpacity style={styles.container} onPress={this.onPress}>
         {!this.state.isOpen ? (
           <View style={[styles.card, { backgroundColor: 'tomato' }]}>
-            <Text style={styles.text}>Tap!</Text>
+            <Text style={styles.text}>{this.state.tapText}</Text>
           </View>
         ) : (
           <View style={[styles.card, { backgroundColor: 'seagreen' }]}>

@@ -11,9 +11,8 @@ More details [here](https://docs.expo.io/versions/latest/introduction/installati
 
 ## UP & Running
 
-1. Navigate to the folder where you will put your projects code
-1. Run `expo init`
-1. `cd your-project-name`
+1. Go to the root folder
+1. Run `npm install`
 1. For this workshop create a .exprc file in the folder root with. This will help us to run projects simultaneously.
 
 ```
@@ -32,3 +31,6 @@ Cat API https://api.thecatapi.com/v1/images/search
 
 1. Prettier
 1. Typescript
+
+## Branches
+You'll find a branch for every step of the workshop.

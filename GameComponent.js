@@ -106,14 +106,7 @@ export default class GameComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text
-          style={{
-            color: 'lightslategrey',
-            fontWeight: 'bold',
-            fontSize: 22
-          }}>
-          Meow Match
-        </Text>
+        <Text style={styles.title}>Meow Match</Text>
         <View style={styles.cards}>
           {this.state.cards.map((item, index) => (
             <GameCardComponent
@@ -164,5 +157,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignContent: 'space-around',
     justifyContent: 'space-around'
+  },
+  title: {
+    color: 'lightslategrey',
+    fontWeight: 'bold',
+    fontSize: 22
   }
 });

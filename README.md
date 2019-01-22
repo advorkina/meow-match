@@ -1,4 +1,6 @@
 # react-native-intro
+## Try it in EXPO!
+[https://expo.io/@advorkina/react-native-memory-game](https://expo.io/@advorkina/react-native-memory-game)
 
 ## Installation
 

@@ -3,9 +3,9 @@
 ## Installation
 
 1. Download and install latest version of [nodeJS](https://nodejs.org/en/)
-1. Download and install VS Code
 1. Run `npm install -g expo-cli` (don't forget sudo if on MAC)
 1. Download expo for [Android](https://play.google.com/store/apps/details?id=host.exp.exponent) or [iPhone](https://search.itunes.apple.com/WebObjects/MZContentLink.woa/wa/link?path=apps%2fexponent)
+1. Optionally get VS Code as dev environment
 
 More details [here](https://docs.expo.io/versions/latest/introduction/installation.html)
 

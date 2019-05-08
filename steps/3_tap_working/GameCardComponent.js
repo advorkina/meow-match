@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableHighlight } from 'react-native';
 
+// can be written as hooks
 export default class GameCardComponent extends Component {
   constructor(props) {
     super(props);
-    this.state = { isOpen: false, tapText: 'Tap!' };
+    this.state = { isOpen: false, tapText: '?' };
   }
+
   onPress = () => {
     this.setState(prev => ({
       isOpen: !prev.isOpen
@@ -14,14 +16,14 @@ export default class GameCardComponent extends Component {
 
   render() {
     return (
-      <TouchableOpacity style={styles.container} onPress={this.onPress}>
+      <TouchableOpacity style={styles.container} onPress={this.onPress} underlayColor="yellow">
         {!this.state.isOpen ? (
-          <View style={[styles.card, { backgroundColor: 'tomato' }]}>
+          <View style={[styles.card, {  backgroundColor: '#38B6FF' }]}>
             <Text style={styles.text}>{this.state.tapText}</Text>
           </View>
         ) : (
-          <View style={[styles.card, { backgroundColor: 'seagreen' }]}>
-            <Text style={styles.text}>I'm opened!</Text>
+          <View style={[styles.card, { backgroundColor: '#434966' }]}>
+            <Text style={styles.text}>Opened!</Text>
           </View>
         )}
       </TouchableOpacity>
@@ -30,6 +32,7 @@ export default class GameCardComponent extends Component {
 }
 const styles = StyleSheet.create({
   container: {
+    marginTop: 15,
     width: '30%',
     aspectRatio: 1
   },
@@ -37,8 +40,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
-    flex: 1,
-    marginTop: 15
+    flex: 1
   },
   text: {
     color: 'white',

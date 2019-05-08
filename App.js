@@ -7,6 +7,7 @@ import { default as GameComponentStep3 } from './steps/3_tap_working/GameCompone
 import { default as GameComponentStep4 } from './steps/4_cat_api/GameComponent';
 import { default as GameComponentStep5 } from './steps/5_random_cats/GameComponent';
 import { default as GameComponentStep6 } from './steps/6_matching_algo/GameComponent';
+import { default as GameComponentStep1 } from './steps/1_getting_started/GameComponent';
 
 export default class App extends React.Component {
   activeStep = 1;
@@ -14,11 +15,7 @@ export default class App extends React.Component {
   getGameComponent = () => {
     switch (this.activeStep) {
       case 1:
-        return (
-          <View style={styles.container}>
-            <Text>Open up App.js to start working on your app!</Text>
-          </View>
-        );
+        return <GameComponentStep1 />;
       case 2:
         return <GameComponentStep2 />;
       case 3:
@@ -42,7 +39,6 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center'
   }

@@ -19,20 +19,18 @@ function getNextAvailableRandom(cards) {
   return nextSpot;
 }
 
+const CAT_API_URL = 'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6';
+
 export default class GameComponent extends Component {
   constructor(props) {
     super(props);
     this.state = { cards: [] };
   }
 
-  componentWillMount = async () => {
-    const response = await fetch(
-      'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6'
-    );
-    const cats = await response.json();
-    catsUrl = cats.map(c => c.url);
+  componentDidMount = async () => {
+    const catsUrl = await this.getCatUrls();
 
-    cards = new Array(12);
+    const cards = new Array(12);
     for (let i = 0; i < 6; i++) {
       let nextSpot = getNextAvailableRandom(cards);
       cards[nextSpot] = catsUrl[i];
@@ -43,6 +41,12 @@ export default class GameComponent extends Component {
 
     this.setState({ cards: cards });
   };
+
+  getCatUrls = async () => {
+    const response = await fetch(CAT_API_URL);
+    const cats = await response.json();
+    return cats.map(c => c.url);
+  }
 
   render() {
     return (
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: '#292D3F',
     alignItems: 'center',
     alignContent: 'center',
     flexWrap: 'wrap',

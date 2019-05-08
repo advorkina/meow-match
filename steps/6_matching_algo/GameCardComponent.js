@@ -8,11 +8,11 @@ export default class GameCardComponent extends Component {
         style={styles.container}
         onPress={() => this.props.onCardTap(this.props.card.id)}>
         {!this.props.card.isOpen ? (
-          <View style={[styles.card, { backgroundColor: '#E552EA' }]}>
-            <Text style={styles.text}>Tap!</Text>
+          <View style={[styles.card,  {  backgroundColor: '#38B6FF' }]}>
+            <Text style={styles.text}>?</Text>
           </View>
         ) : (
-          <View style={[styles.card, { backgroundColor: '#FFCCED' }]}>
+          <View style={[styles.card,  { backgroundColor: '#434966' }]}>
             <Image
               source={{ uri: this.props.card.url }}
               style={{ width: '100%', height: '100%', borderRadius: 15 }}

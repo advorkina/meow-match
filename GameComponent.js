@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity, Text, Image } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  Dimensions
+} from 'react-native';
 import GameCardComponent from './GameCardComponent';
+
+const SCREEN_WIDTH = Math.round(Dimensions.get('window').width);
 
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -18,6 +27,9 @@ function getNextAvailableRandom(cards) {
 
   return nextSpot;
 }
+
+const CAT_API_URL =
+  'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6';
 
 export default class GameComponent extends Component {
   currentAttemptToMatch = [];
@@ -46,7 +58,7 @@ export default class GameComponent extends Component {
     if (this.currentAttemptToMatch.length > 1) {
       return;
     }
-    console.log(this.currentAttemptToMatch);
+
     this.currentAttemptToMatch.push(id);
 
     const cardsCopy = [...this.state.cards];
@@ -66,7 +78,9 @@ export default class GameComponent extends Component {
     setTimeout(() => {
       const cardsCopy = [...this.state.cards];
       cardsCopy[id].isOpen = false;
-      cardsCopy[this.currentAttemptToMatch[0]].isOpen = false;
+      if (cardsCopy[this.currentAttemptToMatch[0]]) {
+        cardsCopy[this.currentAttemptToMatch[0]].isOpen = false;
+      }
       this.setState(
         prev => ({ ...prev, cards: cardsCopy }),
         () => {
@@ -79,15 +93,10 @@ export default class GameComponent extends Component {
   onReset = async () => {
     this.matchingCards = {};
     this.currentAttemptToMatch = [];
+    const catsUrl = await this.getCatUrls();
 
-    const response = await fetch(
-      'https://api.thecatapi.com/v1/images/search?mime_types=gif&limit=6'
-    );
-    const cats = await response.json();
-    catsUrl = cats.map(c => c.url);
-
-    cards = new Array(12);
-    matchingDictionary = {};
+    const cards = new Array(12);
+    const matchingDictionary = {};
     for (let i = 0; i < 6; i++) {
       let nextSpot1 = getNextAvailableRandom(cards);
       cards[nextSpot1] = { id: nextSpot1, url: catsUrl[i], isOpen: false };
@@ -103,10 +112,16 @@ export default class GameComponent extends Component {
     this.setState({ cards, matchingDictionary });
   };
 
+  getCatUrls = async () => {
+    const response = await fetch(CAT_API_URL);
+    const cats = await response.json();
+    return cats.map(c => c.url);
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Meow Match</Text>
+        <Text style={styles.title}>meow</Text>
         <View style={styles.cards}>
           {this.state.cards.map((item, index) => (
             <GameCardComponent
@@ -118,7 +133,7 @@ export default class GameComponent extends Component {
         </View>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={this.onReset}>
-            <Text style={styles.buttonText}>Reset!</Text>
+            <Text style={styles.buttonText}>Reset</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -128,12 +143,12 @@ export default class GameComponent extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: 'lightslategrey',
-    width: 150,
+    backgroundColor: 'black',
     height: 40,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15
+    borderRadius: 15,
+    width: SCREEN_WIDTH * 0.8
   },
   buttonContainer: {
     flex: 0.1,
@@ -142,11 +157,12 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 20
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#292D3F',
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -159,8 +175,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   title: {
-    color: 'lightslategrey',
+    color: 'white',
     fontWeight: 'bold',
-    fontSize: 22
+    fontSize: 26,
+    marginTop: 10
   }
 });

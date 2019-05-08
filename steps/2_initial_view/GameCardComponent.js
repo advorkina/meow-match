@@ -5,7 +5,7 @@ export default class GameCardComponent extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.text}>Tap!</Text>
+        <Text style={styles.text}>?</Text>
       </View>
     );
   }
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   container: {
     width: '30%',
     aspectRatio: 1,
-    backgroundColor: 'tomato',
+    backgroundColor: '#38B6FF',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,

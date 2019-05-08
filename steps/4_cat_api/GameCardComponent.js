@@ -16,13 +16,13 @@ export default class GameCardComponent extends Component {
     return (
       <TouchableOpacity style={styles.container} onPress={this.onPress}>
         {!this.state.isOpen ? (
-          <View style={[styles.card, { backgroundColor: '#E552EA' }]}>
-            <Text style={styles.text}>Tap!</Text>
+          <View style={[styles.card, {  backgroundColor: '#38B6FF' }]}>
+            <Text style={styles.text}>?</Text>
           </View>
         ) : (
-          <View style={[styles.card, { backgroundColor: '#FFCCED' }]}>
+          <View style={[styles.card, { backgroundColor: '#434966' }]}>
             <Image
-              source={{ uri: this.props.imageUrl }}
+              source={{ uri: '' }}
               style={{ width: '100%', height: '100%', borderRadius: 15 }}
             />
           </View>
@@ -35,14 +35,14 @@ export default class GameCardComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     width: '30%',
-    aspectRatio: 1
+    aspectRatio: 1,
+    marginTop: 15
   },
   card: {
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
-    flex: 1,
-    marginTop: 15
+    flex: 1
   },
   text: {
     color: 'white',

@@ -19,6 +19,8 @@ function getNextAvailableRandom(cards) {
   return nextSpot;
 }
 
+const CAT_API_URL = 'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6';
+
 export default class GameComponent extends Component {
   currentAttemptToMatch = [];
   alreadyMatched = [];
@@ -32,13 +34,9 @@ export default class GameComponent extends Component {
   }
 
   componentWillMount = async () => {
-    const response = await fetch(
-      'https://api.thecatapi.com/v1/images/search?mime_types=gif&limit=6'
-    );
-    const cats = await response.json();
-    catsUrl = cats.map(c => c.url);
+    const catsUrl = await this.getCatUrls();
 
-    cards = new Array(12);
+    const cards = new Array(12);
     for (let i = 0; i < 6; i++) {
       let nextSpot1 = getNextAvailableRandom(cards);
       cards[nextSpot1] = { id: nextSpot1, url: catsUrl[i], isOpen: false };
@@ -52,6 +50,12 @@ export default class GameComponent extends Component {
 
     this.setState({ cards });
   };
+
+  getCatUrls = async () => {
+    const response = await fetch(CAT_API_URL);
+    const cats = await response.json();
+    return cats.map(c => c.url);
+  }
 
   /*
    1. first open the card
@@ -86,7 +90,17 @@ export default class GameComponent extends Component {
       return;
     }
 
-    // TODO: your code here
+    setTimeout(() => {
+      const cardsCopy = [...this.state.cards];
+      cardsCopy[id].isOpen = false;
+      cardsCopy[this.currentAttemptToMatch[0]].isOpen = false;
+      this.setState(
+        prev => ({ ...prev, cards: cardsCopy }),
+        () => {
+          this.currentAttemptToMatch = [];
+        }
+      );
+    }, 1000);
   };
 
   render() {
@@ -108,7 +122,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: '#fff',
+    backgroundColor: '#292D3F',
     alignItems: 'center',
     alignContent: 'center',
     flexWrap: 'wrap',

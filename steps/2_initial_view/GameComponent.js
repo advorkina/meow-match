@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#292D3F',
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    // justifyContent: 'space-around',
-    // alignContent: 'center',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    justifyContent: 'flex-start',
+    alignContent: 'flex-start',
     width: '100%'
   }
 });

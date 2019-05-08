@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import GameComponent from './GameComponent';
 
 import { default as GameComponentStep2 } from './steps/2_initial_view/GameComponent';
@@ -10,7 +10,7 @@ import { default as GameComponentStep6 } from './steps/6_matching_algo/GameCompo
 import { default as GameComponentStep1 } from './steps/1_getting_started/GameComponent';
 
 export default class App extends React.Component {
-  activeStep = 1;
+  activeStep = 2;
 
   getGameComponent = () => {
     switch (this.activeStep) {

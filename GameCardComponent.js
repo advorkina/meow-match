@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
   Image,
   Animated
@@ -57,7 +56,7 @@ export default class GameCardComponent extends Component {
         onPress={this.onPress}
         activeOpacity={0.9}>
         <Animated.View
-          style={[styles.card, {  backgroundColor: '#38B6FF' }, frontAnimation]}>
+          style={[styles.card, { backgroundColor: '#38B6FF' }, frontAnimation]}>
           <Text style={{ color: 'white', fontWeight: 'bold' }}>?</Text>
         </Animated.View>
         <Animated.View style={[styles.card, styles.backCard, backAnimation]}>

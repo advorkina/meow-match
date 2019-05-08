@@ -19,7 +19,8 @@ function getNextAvailableRandom(cards) {
   return nextSpot;
 }
 
-const CAT_API_URL = 'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6';
+const CAT_API_URL =
+  'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6';
 
 export default class GameComponent extends Component {
   currentAttemptToMatch = [];
@@ -55,7 +56,7 @@ export default class GameComponent extends Component {
     const response = await fetch(CAT_API_URL);
     const cats = await response.json();
     return cats.map(c => c.url);
-  }
+  };
 
   /*
    1. first open the card
@@ -100,7 +101,7 @@ export default class GameComponent extends Component {
           this.currentAttemptToMatch = [];
         }
       );
-    }, 1000);
+    }, 2000);
   };
 
   render() {

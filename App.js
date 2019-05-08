@@ -10,7 +10,7 @@ import { default as GameComponentStep6 } from './steps/6_matching_algo/GameCompo
 import { default as GameComponentStep1 } from './steps/1_getting_started/GameComponent';
 
 export default class App extends React.Component {
-  activeStep = 5;
+  activeStep = 7;
 
   getGameComponent = () => {
     switch (this.activeStep) {
@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#292D3F'
   }
 });

@@ -19,7 +19,8 @@ function getNextAvailableRandom(cards) {
   return nextSpot;
 }
 
-const CAT_API_URL = 'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6';
+const CAT_API_URL =
+  'https://api.thecatapi.com/v1/images/search?mime_types=jpg,png&limit=6';
 
 export default class GameComponent extends Component {
   constructor(props) {
@@ -39,14 +40,14 @@ export default class GameComponent extends Component {
       cards[nextSpot] = catsUrl[i];
     }
 
-    this.setState({ cards: cards });
+    this.setState({ cards });
   };
 
   getCatUrls = async () => {
     const response = await fetch(CAT_API_URL);
     const cats = await response.json();
     return cats.map(c => c.url);
-  }
+  };
 
   render() {
     return (

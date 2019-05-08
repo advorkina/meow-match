@@ -10,7 +10,7 @@ import { default as GameComponentStep6 } from './steps/6_matching_algo/GameCompo
 import { default as GameComponentStep1 } from './steps/1_getting_started/GameComponent';
 
 export default class App extends React.Component {
-  activeStep = 2;
+  activeStep = 3;
 
   getGameComponent = () => {
     switch (this.activeStep) {

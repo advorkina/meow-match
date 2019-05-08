@@ -2,25 +2,26 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import GameCardComponent from './GameCardComponent';
 
-const CAT_API_URL = 'https://api.thecatapi.com/v1/images/search?mime_types=gif&limit=1';
+const CAT_API_URL =
+  'https://api.thecatapi.com/v1/images/search?mime_types=gif&limit=1';
 
 export default class GameComponent extends Component {
   state = { cards: [] };
 
   componentDidMount = async () => {
     const catUrl = await this.getCatUrl();
-    const cards = [];
+    const catUrls = [];
     for (let i = 0; i < 9; i++) {
-      cards.push({ id: i, url: catUrl });
+      catUrls.push({ id: i, url: catUrl });
     }
-    this.setState({ cards });
+    this.setState({ cards: catUrls });
   };
 
   getCatUrl = async () => {
     const response = await fetch(CAT_API_URL);
     const cat = await response.json();
     return cat[0].url;
-  }
+  };
 
   render() {
     return (

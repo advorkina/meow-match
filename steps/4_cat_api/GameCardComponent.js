@@ -2,29 +2,22 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 
 export default class GameCardComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isOpen: false };
-  }
+  state = { isOpen: false };
+
   onPress = () => {
-    this.setState(prev => ({
-      isOpen: !prev.isOpen
-    }));
+    this.setState({ isOpen: !this.state.isOpen });
   };
 
   render() {
     return (
       <TouchableOpacity style={styles.container} onPress={this.onPress}>
         {!this.state.isOpen ? (
-          <View style={[styles.card, {  backgroundColor: '#38B6FF' }]}>
+          <View style={[styles.card, { backgroundColor: '#38B6FF' }]}>
             <Text style={styles.text}>?</Text>
           </View>
         ) : (
           <View style={[styles.card, { backgroundColor: '#434966' }]}>
-            <Image
-              source={{ uri: '' }}
-              style={{ width: '100%', height: '100%', borderRadius: 15 }}
-            />
+            <Text>Opened!</Text>
           </View>
         )}
       </TouchableOpacity>
